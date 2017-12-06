@@ -1,0 +1,40 @@
+{
+  "name": "multiconsumer-kue",
+  "version": "0.1.0",
+  "author": "lostintime <lostintime.dev@gmail.com>",
+  "license": "Apache-2.0",
+  "description": "A multi-consumer queue on top of Kue",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "Queue",
+    "Kue",
+    "Event Sourcing"
+  ],
+  "bugs": {
+    "url": "https://github.com/lostintime/node-multiconsumer-kue/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lostintime/node-multiconsumer-kue.git"
+  },
+  "scripts": {
+    "test": "tsc && mocha \"dist/test/\"",
+    "lint": "tslint --project tsconfig.json",
+    "clean": "rm -R dist/",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "kue": "^0.11.6",
+    "multiconsumer-queue": "^0.1.0",
+    "redis": "^2.8.0",
+    "redis-liveset": "^0.1.2"
+  },
+  "devDependencies": {
+    "@types/kue": "^0.11.8",
+    "tslint": "^5.8.0",
+    "tslint-config-standard": "^7.0.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "typescript": "^2.6.1"
+  }
+}
