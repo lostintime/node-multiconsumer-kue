@@ -31,7 +31,7 @@ bus.topic("my-topic").process("save", (job, cb) => {
   cb()
 })
 
-bus.add("Hello World!")
+bus.topic("my-topic").add("Hello World!")
 ```
 
 NOTE: Wrapper implementation is not removing consumer groups from `RedisLiveQueue` so once you're

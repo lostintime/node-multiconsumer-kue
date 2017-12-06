@@ -1,6 +1,6 @@
 {
   "name": "multiconsumer-kue",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "lostintime <lostintime.dev@gmail.com>",
   "license": "Apache-2.0",
   "description": "A multi-consumer queue on top of Kue",
