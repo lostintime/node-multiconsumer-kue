@@ -1,7 +1,7 @@
 MultiConsumer Kue
 ===================
 
-A [multi-consumer](https://www.npmjs.com/package/multiconsumer-queue) queue implementation using Kue[]
+A [multi-consumer queue](https://www.npmjs.com/package/multiconsumer-queue) implementation using [Kue](https://www.npmjs.com/package/kue).
 
 
 ## Installation
@@ -42,7 +42,7 @@ Group can be removed using `MultiConsumerQueueImpl.removeGroup()` method:
 
 ```typescript
 
-const bus = createEventBus(...)
+const bus = MultiConsumerKue(...)
 
 // deploy this to your servers to stop collecting tasks
 bus.topic("my-topic").removeGroup("old-process-group")
