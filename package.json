@@ -1,6 +1,6 @@
 {
   "name": "multiconsumer-kue",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "lostintime <lostintime.dev@gmail.com>",
   "license": "Apache-2.0",
   "description": "A multi-consumer queue on top of Kue",
@@ -26,9 +26,9 @@
   },
   "dependencies": {
     "kue": "^0.11.6",
-    "multiconsumer-queue": "^0.1.1",
+    "multiconsumer-queue": "^0.1.2",
     "redis": "^2.8.0",
-    "redis-liveset": "^0.1.2"
+    "redis-liveset": "^0.2.0"
   },
   "devDependencies": {
     "@types/kue": "^0.11.8",
