@@ -41,7 +41,7 @@ class KueNamedQueue implements NamedQueue<kue.Job> {
  */
 export function MultiConsumerKue(queue: kue.Queue,
                                  redis: () => redis.RedisClient,
-                                 liveSetKey: (topic: string) => string = (topic) => `kueConsumerGroups/${topic}`): EventBus<kue.Job> {
+                                 liveSetKey: (topic: string) => string = (topic) => `QueueMultiConsumerGroups/${topic}`): EventBus<kue.Job> {
   return new EventBusImpl((topic: string) => {
     const kQueue = new KueNamedQueue(queue)
     const src: Queue<kue.Job> = new NamedQueueWrap(topic, kQueue)
