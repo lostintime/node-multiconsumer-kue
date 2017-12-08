@@ -23,6 +23,8 @@ import {
 import { createStringsLiveSet } from "redis-liveset"
 import * as redis from "redis"
 
+export * from "multiconsumer-queue"
+
 class KueNamedQueue implements NamedQueue<kue.Job> {
   constructor(private readonly _out: kue.Queue) {
   }
