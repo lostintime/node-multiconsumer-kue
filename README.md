@@ -34,7 +34,7 @@ bus.topic("my-topic").process("save", (job, cb) => {
 bus.topic("my-topic").add("Hello World!")
 ```
 
-NOTE: Wrapper implementation is not removing consumer groups from `RedisLiveQueue` so once you're
+NOTE: Wrapper implementation is not removing consumer groups from `RedisLiveSet` so once you're
  not interested anymore for processing topic messages for specific `groupId` -
  you must remove that group and tasks manually
 
