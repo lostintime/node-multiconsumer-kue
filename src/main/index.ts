@@ -18,7 +18,7 @@ import * as kue from "kue"
 import {
   DynamicallyNamedQueue,
   EventBus, EventBusImpl, MultiConsumerQueueImpl, NamedQueue, NamedQueueWrap,
-  ProcessCallback, Queue
+  ProcessCallback, Queue, QueueTopic, ConsumerGroupId
 } from "multiconsumer-queue"
 import { createStringsLiveSet } from "redis-liveset"
 import * as redis from "redis"
@@ -29,12 +29,12 @@ class KueNamedQueue implements NamedQueue<kue.Job> {
   constructor(private readonly _out: kue.Queue) {
   }
 
-  add(name: string, data: any): void {
-    this._out.create(name, data).removeOnComplete(true).save()
+  add(topic: QueueTopic, data: any): void {
+    this._out.create(topic, data).removeOnComplete(true).save()
   }
 
-  process(name: string, fn: ProcessCallback<kue.Job>, n: number = 1): void {
-    this._out.process(name, n, fn)
+  process(topic: QueueTopic, fn: ProcessCallback<kue.Job>, n: number = 1): void {
+    this._out.process(topic, n, fn)
   }
 }
 
@@ -43,11 +43,11 @@ class KueNamedQueue implements NamedQueue<kue.Job> {
  */
 export function MultiConsumerKue(queue: kue.Queue,
                                  redis: () => redis.RedisClient,
-                                 liveSetKey: (topic: string) => string = (topic) => `QueueMultiConsumerGroups/${topic}`): EventBus<kue.Job> {
-  return new EventBusImpl((topic: string) => {
+                                 liveSetKey: (topic: QueueTopic) => QueueTopic = (topic) => QueueTopic(`QueueMultiConsumerGroups/${topic}`)): EventBus<kue.Job> {
+  return new EventBusImpl((topic: QueueTopic) => {
     const kQueue = new KueNamedQueue(queue)
     const src: Queue<kue.Job> = new NamedQueueWrap(topic, kQueue)
-    const dest: NamedQueue<kue.Job> = new DynamicallyNamedQueue((groupId) => `${topic}/${groupId}`, kQueue)
+    const dest: NamedQueue<kue.Job> = new DynamicallyNamedQueue((groupId) => QueueTopic(`${topic}/${groupId}`), kQueue)
     const groups = createStringsLiveSet(liveSetKey(topic), redis(), redis())
 
     return new MultiConsumerQueueImpl(src, dest, groups, (job) => job.data)
